@@ -20,14 +20,17 @@ export default function Home({ data }: { data: Items }) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="w-screen h-screen font-bold">
-      <div className="flex flex-col	 items-center justify-center h-full">
+    <div className="w-dvw h-dvh font-bold">
+      <div className="flex flex-col items-center justify-center h-full">
         <div className="p-4">{selectedStation}</div>
         <button
           className="bg-sky-500 text-white py-2 px-4 rounded"
           onClick={() => {
+            if (isLoading) return;
+
             setIsLoading(true);
             setSelectedStation(DEFAULT_VALUE);
+
             setTimeout(() => {
               const result = readDataAndCalculateTraffic(data);
               setSelectedStation(result);

@@ -4,14 +4,6 @@ import Papa from "papaparse";
 import path from "path";
 import { useState } from "react";
 
-export async function getServerSideProps() {
-  const filePath = path.join(process.cwd(), "public", "data.csv");
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const parsedData = Papa.parse(fileContent, { header: true }).data;
-
-  return { props: { data: parsedData } };
-}
-
 const DEFAULT_VALUE = "？？？";
 const DELAY = 3000;
 
@@ -43,4 +35,12 @@ export default function Home({ data }: { data: Items }) {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const filePath = path.join(process.cwd(), "public", "data.csv");
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const parsedData = Papa.parse(fileContent, { header: true }).data;
+
+  return { props: { data: parsedData } };
 }

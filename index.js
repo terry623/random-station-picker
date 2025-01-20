@@ -39,7 +39,9 @@ function sortTrafficAndPickRandom(stations) {
   const sortedStations = sortTrafficByAsc(stations);
 
   console.log("排序後的站點流量:");
-  console.table(sortedStations);
+  console.table(
+    sortedStations.map((data) => [data[0], data[1].toLocaleString()])
+  );
 
   const randomStation = pickRandomStationFromTop50Percent(sortedStations);
   console.log(`從人流低的前 50% 站中隨機抽取一站: ${randomStation[0]}`);

@@ -28,17 +28,19 @@ function sortTrafficByAsc(stations: Record<string, number>) {
   return Object.entries(stations).sort((a, b) => a[1] - b[1]);
 }
 
-function pickRandomStationFromTop50Percent(sortedStations: [string, number][]) {
-  const halfLength = Math.ceil(sortedStations.length / 2);
-  const top50PercentStations = sortedStations.slice(0, halfLength);
+function pickRandomStationFromTop33Percent(sortedStations: [string, number][]) {
+  const targetStations = sortedStations.slice(
+    0,
+    Math.ceil(sortedStations.length / 3)
+  );
 
-  const randomIndex = Math.floor(Math.random() * top50PercentStations.length);
-  return top50PercentStations[randomIndex];
+  const randomIndex = Math.floor(Math.random() * targetStations.length);
+  return targetStations[randomIndex];
 }
 
 function sortTrafficAndPickRandom(stations: Record<string, number>) {
   const sortedStations = sortTrafficByAsc(stations);
 
-  const randomStation = pickRandomStationFromTop50Percent(sortedStations);
+  const randomStation = pickRandomStationFromTop33Percent(sortedStations);
   return randomStation[0];
 }
